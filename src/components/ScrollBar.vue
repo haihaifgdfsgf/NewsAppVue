@@ -54,6 +54,7 @@
           document.ontouchmove = null;
           document.ontouchend = null;
         }
+        ev.preventDefault();
       },
       move(targe,v) {
         let speed = 0;
