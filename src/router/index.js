@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import ScrollBar from '../components/ScrollBar.vue'
+import TitleBar from '../components/TitleBar.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +16,11 @@ export default new Router({
       path: '/scrollbar',
       name: 'ScrollBar',
       component: ScrollBar
+    },
+    {
+      path: '/titlebar',
+      name: 'titlebar',
+      component: TitleBar
     },
   ]
 })
