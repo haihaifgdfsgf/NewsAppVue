@@ -17,6 +17,7 @@
     methods: {
       touchStart(ev) {
         let startX = ev.touches[0].clientX;
+        let x=startX;
         let _vue = this;
         let minLeft = document.documentElement.clientWidth - ev.target.parentNode.offsetWidth;
         document.ontouchmove = function (ev) {
@@ -33,29 +34,33 @@
         }
         document.ontouchend = function (ev) {
           var oEvent = ev || event;
-          var oritaition =  oEvent.changedTouches[0].clientX - startX;
+          var oritaition =  oEvent.changedTouches[0].clientX - x;
           if (_vue.left > 0) {
-            _vue.move(0);
+            _vue.move(0,15);
           } else if (_vue.left < minLeft) {
-            _vue.move(minLeft);
+            _vue.move(minLeft,15);
           }else {
+            let targe=0;
             if (oritaition>0){
-              _vue.move(_vue.left+50);
+              targe=_vue.left+30;
+              targe=targe>0?0:targe;
             }else {
-              _vue.move(_vue.left-50);
+              targe=_vue.left-30;
+              targe=targe<minLeft?minLeft:targe;
             }
+            _vue.move(targe,5);
           }
 
           document.ontouchmove = null;
           document.ontouchend = null;
         }
       },
-      move(targe) {
+      move(targe,v) {
         let speed = 0;
         if (targe > this.left) {
-          speed = 15;
+          speed = v;
         } else {
-          speed = -15;
+          speed = -v;
         }
         let time = setInterval(() => {
           console.log(this.left)
